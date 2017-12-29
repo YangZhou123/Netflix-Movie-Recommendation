@@ -1,0 +1,74 @@
+extends layout
+
+block content
+    .content
+      .box_1
+        h1.m_2 Recommend to you
+        .clearfix
+
+      .box_2
+        if rec.length == 0
+            h4 You haven't rated any movies. Please start the recommendations by rating the movies below.
+        else
+            each movie in rec
+                .col-md-2.grid_6
+                    .m_7
+                        a(href='/movie/' + movie.id)
+                            if movie.Poster
+                                img.img-responsive.img-rounded(src="/posters/" + movie.id + ".jpg", alt=movie.Title, style="height:200px; width:160px;")
+                            else
+                                img.img-responsive.img-rounded(src="/images/ComingSoon.jpg", alt=movie.Title, style="height:200px; width:160px;")
+                    .caption1
+                        if movie.imdbRating
+                            ul.list_5
+                                li
+                                    i.icon5
+                                    p !{movie.imdbRating}
+                        p.m_3 !{movie.Title}
+        .clearfix
+
+      .box_1
+        h1.m_2 Featured Movies
+        .clearfix
+
+      .box_2
+        each movie in movie_list
+            .col-md-2.grid_6
+                .m_7
+                    a(href='/movie/' + movie.id)
+                        if movie.Poster
+                            img.img-responsive.img-rounded(src="/posters/" + movie.id + ".jpg", alt=movie.Title, style="height:200px; width:160px;")
+                        else
+                            img.img-responsive.img-rounded(src="/images/ComingSoon.jpg", alt=movie.Title, style="height:200px; width:160px;")
+                .caption1
+                    if movie.imdbRating
+                        ul.list_5
+                            li
+                                i.icon5
+                                p !{movie.imdbRating}
+                    p.m_3 !{movie.Title}
+
+        .clearfix
+
+       .box_1
+        h1.m_2 You may interest
+        .clearfix
+
+       .box_2
+        each movie in rest
+            .col-md-2.grid_6
+                .m_7
+                    a(href='/movie/' + movie.id)
+                        if movie.Poster
+                            img.img-responsive.img-rounded(src="/posters/" + movie.id + ".jpg", alt=movie.Title, style="height:200px; width:160px;")
+                        else
+                            img.img-responsive.img-rounded(src="/images/ComingSoon.jpg", alt=movie.Title, style="height:200px; width:160px;")
+                .caption1
+                    if movie.imdbRating
+                        ul.list_5
+                            li
+                                i.icon5
+                                p !{movie.imdbRating}
+                    p.m_3 !{movie.Title}
+
+        .clearfix

@@ -1,0 +1,107 @@
+doctype html
+html
+  head
+    title
+      | CMPT 732 Final Project Movie Recomendations
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#4DA5F4')
+    meta(name='csrf-token', content=_csrf)
+    title #{title}
+    script(type='application/x-javascript').
+      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    link(href='../css/bootstrap.css', rel='stylesheet', type='text/css')
+    link(href='../css/style.css', rel='stylesheet', type='text/css', media='all')
+    // start plugins
+    script(type='text/javascript', src='../js/jquery-1.11.1.min.js')
+    script(type='text/javascript', src='../js/main.js')
+    link(href='http://fonts.googleapis.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900', rel='stylesheet', type='text/css')
+  body
+    .container
+      .container_wrap
+        .header_top
+          .col-sm-3.logo
+          .col-sm-6.nav
+            ul
+              li
+                span.simptip-position-bottom.simptip-movable(data-tooltip='movie')
+                  a(href='/movies')
+          .col-sm-3.header_right
+            if user
+                ul.header_right_box
+                  li
+                    p #{user.email}
+                  li.last
+                    p
+                      a(href='/logout') Log out
+                  .clearfix
+          .clearfix
+        .content
+            .movie_top
+              .col-md-9.movie_box
+                .grid.images_3_of_2
+                  .movie_image
+                    if movie.imdbRating
+                        span.movie_rating !{movie.imdbRating}
+                    if movie.Poster
+                        img.img-responsive(src="/posters/" + movie.id + ".jpg", alt='')
+                    else
+                        img.img-responsive.img-rounded(src="../images/ComingSoon.jpg", alt=movie.Title)
+                  .movie_rate
+                    .rating_desc
+                      p Your Vote :
+                    form.sky-form(method='POST' action='/rating')
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='movie_id', value=movie.id)
+                      fieldset
+                        section
+                          .rating
+                            input.star#stars-rating-5(type='radio', name='stars-rating' checked=rating==5)
+                            label(for='stars-rating-5')
+                              i.icon-star
+                            input.star#stars-rating-4(type='radio', name='stars-rating' checked=rating==4)
+                            label(for='stars-rating-4')
+                              i.icon-star
+                            input.star#stars-rating-3(type='radio', name='stars-rating' checked=rating==3)
+                            label(for='stars-rating-3')
+                              i.icon-star
+                            input.star#stars-rating-2(type='radio', name='stars-rating' checked=rating==2)
+                            label(for='stars-rating-2')
+                              i.icon-star
+                            input.star#stars-rating-1(type='radio', name='stars-rating' checked=rating==1)
+                            label(for='stars-rating-1')
+                              i.icon-star
+                    .clearfix
+                .desc1.span_3_of_2
+                  p.movie_option
+                    strong Country:
+                    span !{movie.Country}
+                  p.movie_option
+                    strong Year:
+                    | !{movie.Year}
+                  p.movie_option
+                    strong Category:
+                    span !{movie.Genre}
+                  p.movie_option
+                    strong Release date:
+                    span !{movie.Released}
+                  p.movie_option
+                    strong Director:
+                    span !{movie.Director}
+                  p.movie_option
+                    strong Actors:
+                    span !{movie.Actors}
+                  if movie.imdbID
+                      p.movie_option
+                        strong IMDB:
+                        a(href='http://www.imdb.com/title/' + movie.imdbID, target="_blank") !{movie.imdbID}
+                  .down_btn
+                    a.btn1(href='/')
+                      span
+                      | Watch
+                .clearfix
+                p.m_4
+                  | !{movie.Plot}
+            .clearfix
+        .clearfix

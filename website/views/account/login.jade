@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+    .content
+        .register
+            .col-md-6.login-left
+              h3 New Customers
+              p
+                | By creating an account with our store, you will be able to track the movies you have watched and rated.
+              a.acount-btn(href='/signup') Create an Account
+            .col-md-6.login-right
+              h3 Registered Customers
+              p If you have an account with us, please log in.
+              form(method='POST' action="/login")
+                input(type='hidden', name='_csrf', value=_csrf)
+                div
+                  span
+                    | Email Address
+                    label *
+                  input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+                div
+                  span
+                    | Password
+                    label *
+                  input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+                input(type='submit', value='Login')
+            .clearfix
